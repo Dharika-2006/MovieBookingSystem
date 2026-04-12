@@ -19,3 +19,7 @@ git checkout master
 git merge develop
 
 git push origin master
+
+pip install mlflow
+python mlflow_demo.py
+python -m mlflow ui
