@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <style>
+            body{
+                font-family: Arial;
+                margin-bottom: auto;
+                text-align: center;
+                background-color: rgb(166, 186, 186);
+            }
+            .box{
+                background-color: white;
+                width:300px;
+                margin:100px auto;
+                padding: 8px;
+                border-radius: 10px;
+                border: 1px solid black;
+            }
+            input{
+                width: 90%;
+                padding: 8px;
+                margin:10px;
+            }
+            button{
+                background-color: blue;
+                color:white;
+                padding: 10px;
+                border: none;
+                width:95%;
+            }
+            #msg{
+                color:red;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="box">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username"><br>
+            <input type="password" id="password" placeholder="Password"><br>
+            <button onclick="Login()">Login</button>
+
+            <p id="msg"></p>
+        </div>
+        <script>
+            function Login(){
+                var u = document.getElementById("username").value;
+                var p = document.getElementById("password").value;
+
+                if(u==""||p==""){
+                    document.getElementById("msg").innerHTML="Please Enter All fields";
+                }
+                else if(u=="admin"&&p=="1234"){
+                    window.location.href="dashboard.html";
+            }
+                else{
+                    document.getElementById("msg").innerHTML="Invalid Login";
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <style>
+            body{
+                font-family:Arial, Helvetica, sans-serif;
+                background-color:rgb(166, 186, 186);
+                text-align:center;
+            }
+            .box{
+                background-color: white;
+                width:300px;
+                margin:100px auto;
+                padding:8px;
+                border:1px solid black;
+                border-radius:10px;
+            }
+            input{
+                width:90%;
+                padding:8px;
+                margin:10px auto;
+            }
+            button{
+                background-color: blue;
+                color:white;
+                padding:8px;
+                border:white;
+                width:95%;
+                margin-top:10px;
+            }
+            #result{
+                color:red;
+                margin-top:10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h2>Movie Booking System</h2>
+            <p>Welcome! Book your favorite movies here.</p>
+            <input type="text" id="movie" placeholder="Enter Movie Name"><br>
+            <button onclick="search()">Search</button><br>
+            <button onclick="logout()">Logout</button><br>
+            <p id="result"></p>
+        </div>
+
+        <script>
+            function search(){
+                var m = document.getElementById("movie").value.toLowerCase();
+                var output="";
+                if(m==""){
+                     output="Please enter a movie name";    
+                }
+                else if(m.includes("avengers"))
+                {
+                    output="<button onclick=\"book('Avengers')\">Avengers</button><br>";
+                    output+="<button onclick=\"book('Avengers Endgame')\">Avengers Endgame</button><br>";
+                }
+                 else if (m.includes("pushpa")) {
+                     output ="<button onclick=\"book('Pushpa')\">Pushpa</button><br>";
+                }
+                 else if (m.includes("kgf")) {
+                      output = "<button onclick = \"book('KGF')\">KGF</button><br>";
+                }
+                 else {
+                      output = "No such movies found";
+                }
+      document.getElementById("result").innerHTML=output;
+        }
+        function book(movie){
+            localStorage.setItem("movie",movie);
+            window.location.href="selection.html";
+        }        
+
+    function logout(){
+        window.location.href="login.html";
+        }
+        </script>
+    </body>
+</html>

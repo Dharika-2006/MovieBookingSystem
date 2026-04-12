@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Selection</title>
+    <style>
+      body{
+        font-family:Arial;
+        background-color: rgb(166, 186, 186);
+        text-align:center;
+      }
+      .box{
+        background-color:white;
+        width:300px;
+        margin:100px auto;
+        padding:8px;
+        border:1px solid black;
+        border-radius:10px;
+      }
+      button{
+        background-color: blue;
+        color:white;
+        padding:8px;
+        border:none;
+        width:95%;
+        margin-top: 10px;
+      }
+      .info{
+        margin:10px;
+      }
+      #movieName{
+        font-size:20px;
+        font-weight:bold;
+        margin:15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Movie Selection</h2>
+      <p id="movieName"></p>
+      <div class="info">Slots Available :3</div>
+      <div class="info">Format: 2D</div>
+      <div class="info">Language: English</div>
+
+      <button onclick ="gobook()">Book Tickets</button>
+      <button onclick ="goback()">Change Movie</button>
+    </div>
+    <script>
+      window.onload=function(){
+        var m=localStorage.getItem("movie");
+
+        if(!m){
+          window.location.href="dashboard.html";
+          return;
+        }
+        document.getElementById("movieName").innerHTML=m;
+      }
+      function gobook(){
+        window.location.href="booking.html";
+      }
+      function goback(){
+        window.location.href="dashboard.html";
+      }
+    </script>
+  </body>
+</html>

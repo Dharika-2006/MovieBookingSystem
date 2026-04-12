@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Confirm Booking</title>
+        <style>
+            body{
+                font-family:Arial;
+                background-color: rgb(166, 186, 186);
+                text-align:center;
+            }
+            .box{
+                background-color: white;
+                width:300px;
+                margin:20px auto;
+                padding:20px;
+                border:1px solid black;
+                border-radius:10px;
+                text-align:left;
+            }
+            h2{
+                text-align:center;
+            }
+            p{
+                margin:10px;
+            }
+            button{
+                background-color: blue;
+                color: white;
+                padding:8px;
+                margin-bottom: 10px;
+                border:none;
+                width:95%;
+                border-radius:10px;
+            }
+            .bold{
+                font-weight: bold;
+            }
+             #errormsg{
+                color: red;
+                margin-top:10px;
+                text-align: center; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h2>Confirm Booking</h2>
+            <p><span class="bold">Movie:</span> <span id="dispmovie"></span></p>
+            <p><span class="bold">Slot :</span><span id="dispslot"></span></p>
+            <p><span class="bold">Tickets:</span><span id="dispTickets"></span></p>
+            <p><span class="bold">Add-ons :</span><span id="dispaddons"></span></p>
+            <p><span class="bold">Total Price:</span><span id="dispprice"></span></p>
+
+            <button onclick="logout()">Logout</button>
+            <button onclick="Bookagain()">Book Again</button>
+        </div>
+
+        <script>
+            window.onload=function(){
+                var m=localStorage.getItem("movie");
+                var s=localStorage.getItem("slot");
+                var t=localStorage.getItem("tickets");
+                var a=localStorage.getItem("addons");
+                var p=localStorage.getItem("total");
+
+                if(!m||!s||!t||!p){
+                    window.location.href="dashboard.html";
+                    return;
+                }
+                document.getElementById("dispmovie").innerHTML=m;
+                document.getElementById("dispslot").innerHTML=s;
+                document.getElementById("dispTickets").innerHTML=t;
+                document.getElementById("dispaddons").innerHTML=a;
+                document.getElementById("dispprice").innerHTML="RS."+p;
+            }
+            function logout(){
+                localStorage.clear();
+                window.location.href="login.html";
+            }
+            function Bookagain(){
+                localStorage.removeItem("slot");
+                localStorage.removeItem("tickets");
+                localStorage.removeItem("addons");
+                localStorage.removeItem("total");
+                localStorage.removeItem("movie");
+
+                window.location.href="dashboard.html";
+
+            }
+        </script>
+    </body>
+    </html>

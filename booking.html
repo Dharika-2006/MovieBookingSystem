@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Booking</title>
+        <style>
+            body{
+                font-family:Arial;
+                background-color:rgb(166, 186, 186);
+            }
+            .box{
+                background-color: white;
+                width:300px;
+                margin:100px auto;
+                padding:20px;
+                border:1px solid black;
+                border-radius:10px;
+                text-align:left;
+            }
+            h2{
+                text-align:center;
+            }
+            #movieDisplay{
+                text-align:center;  
+            }
+            button{
+                background-color: blue;
+                color: white;
+                padding:8px;
+                margin-bottom: 10px;
+                border:none;
+                width:95%;
+                border-radius:10px;
+            }
+            p{
+                margin-top:15px;
+            }
+            input[type="radio"],input[type="checkbox"]{
+                margin-top:10px;
+                margin-right:8px;
+            }
+            input[type="number"]{
+                width:60%;
+                padding:6px;
+                margin-top:5px;
+            }
+            #errormsg{
+            color:red;
+            margin-top:10px;
+            text-align: center;
+        }
+        </style>
+            </head>
+        <body>
+            <div class="box">
+                <h2>Book Tickets</h2>
+                <p id="movieDisplay"></p>
+                <p>Select Time</p>
+                <input type="radio" name="slot" value="10.00AM" data-price="150" checked>10AM (RS.150)<br>
+                <input type="radio" name="slot" value="12.00PM" data-price="200" disabled>12PM (RS.200)<br>
+                <input type="radio" name="slot" value="6.00PM" data-price="250" checked>6PM (RS.250)<br>
+
+                <p Tickets:</p>
+                    <input type="number" id="tickets" value="1" min="1" max="3"><br>
+                <p ADD-ons:</p>
+                    <input type="checkbox" id="snacks">Snacks (+RS.50)<br>
+                    <input type="checkbox" id="Drinks">Drinks (+RS.30)<br>
+
+                <p id="errormsg"></p>
+                <button onclick="bookslot()">Confirm Booking</button>
+                <button onclick="goback()">Back</button>
+            </div>
+            <script>
+                window.onload=function(){
+                    var m=localStorage.getItem("movie");
+                    if(!m){
+                        window.location.href="dashboard.html";
+                        return;
+                    }
+                    document.getElementById("movieDisplay").innerHTML = "Movie:"+m;
+                }
+                function bookslot(){
+                    var slot=document.querySelector('input[name="slot"]:checked');
+                    if(!slot){
+                        document.getElementById("errormsg").innerHTML="Please select a time slot";
+                        return;
+                    }
+                    var price=parseInt(slot.getAttribute("data-price"));
+                    var tickets=parseInt(document.getElementById("tickets").value);
+                    var addons="";
+                    if(tickets<1){
+                        document.getElementById("errormsg").innerHTML="Please select at least 1 ticket";
+                        return;
+                    }
+                    var total=price*tickets;
+                    if(document.getElementById("snacks").checked){
+                        total+=50;
+                        addons+="Snacks ";
+                    }
+                    if(document.getElementById("Drinks").checked){
+                        total+=30;
+                        addons+="Drinks";
+                    }
+                    if(addons==""){
+                        addons="None";
+                    }
+                    localStorage.setItem("movie",document.getElementById("movieDisplay").innerHTML.split(":")[1]);
+                    localStorage.setItem("slot",slot.value);
+                    localStorage.setItem("tickets",tickets);
+                    localStorage.setItem("addons",addons);
+                    localStorage.setItem("total",total);
+                     window.location.href="confirmation.html";
+                }
+                function goback(){
+                    window.location.href="selection.html";
+                }
+            </script>
+        </body>
+</html>
